@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J.BARTEE // MUSIC MACHINES — Browser-Based Instruments & Musical Experiments</title>
+  <meta name="description" content="Seven browser-based synthesizers, drum machines, and generative instruments — playable instantly, no installs. An independent electronic-music software collection by J.Bartee." />
+  <meta name="theme-color" content="#0a0a0c" />
+  <link rel="canonical" href="https://jtbartee.github.io/music-machines/" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="J.Bartee // Music Machines" />
+  <meta property="og:title" content="J.BARTEE // MUSIC MACHINES" />
+  <meta property="og:description" content="Browser-based instruments, generators & musical experiments. Seven playable instruments, no installs." />
+  <meta property="og:url" content="https://jtbartee.github.io/music-machines/" />
+  <meta property="og:image" content="https://jtbartee.github.io/music-machines/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="J.Bartee // Music Machines — browser-based instruments, generators and musical experiments" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="J.BARTEE // MUSIC MACHINES" />
+  <meta name="twitter:description" content="Browser-based instruments, generators & musical experiments. Seven playable instruments, no installs." />
+  <meta name="twitter:image" content="https://jtbartee.github.io/music-machines/assets/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/site.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="#top">
+        <span class="led" aria-hidden="true"></span>
+        J.BARTEE
+      </a>
+      <a class="header-link" href="https://github.com/jtbartee" target="_blank" rel="noopener">
+        <span>github.com/</span>jtbartee
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero-inner">
+        <p class="eyebrow">Browser-Based Instruments &middot; Generators &middot; Experiments</p>
+        <h1>
+          <span class="pre">J.BARTEE //</span>
+          <span class="main">MUSIC MACHINES</span>
+        </h1>
+        <p class="hero-sub">
+          A small collection of playable synthesizers, rhythm machines, and generative
+          instruments that run entirely in your browser — no installs, no accounts, no plugins.
+          Built for musicians first.
+        </p>
+        <p class="status-line">
+          <span><strong data-machine-count>7</strong> MACHINES</span>
+          <span class="sep">//</span>
+          <span>BROWSER&#8209;BASED</span>
+          <span class="sep">//</span>
+          <span>OPEN SOURCE</span>
+        </p>
+        <div class="scope" role="img" aria-label="Animated oscilloscope waveform trace">
+          <canvas id="scope-canvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="collection">
+      <div class="wrap">
+        <div class="collection-head">
+          <h2>The Collection</h2>
+          <span class="count"><span data-machine-count>7</span> INSTRUMENTS — CLICK LAUNCH TO PLAY</span>
+        </div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="footer-brand">
+        J.BARTEE
+        <span>Independent browser instruments &amp; musical experiments.</span>
+      </p>
+      <a class="footer-link" href="https://github.com/jtbartee" target="_blank" rel="noopener">View all projects on GitHub &rarr;</a>
+    </div>
+  </footer>
+
+  <script src="js/project-data.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>
