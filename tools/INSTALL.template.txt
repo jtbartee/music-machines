@@ -1,0 +1,38 @@
+{{NAME}} {{VERSION}} — macOS VST3 / AU / Standalone
+===================================================
+
+WHAT'S IN HERE
+  {{NAME}}.vst3        VST3 plugin
+  {{NAME}}.component   Audio Unit
+  {{NAME}}.app         Standalone app, no DAW needed
+
+Universal binary — runs natively on Apple Silicon and Intel Macs.
+Requires macOS 10.15 or later.
+
+
+INSTALL
+  1. Copy {{NAME}}.vst3      to  ~/Library/Audio/Plug-Ins/VST3/
+  2. Copy {{NAME}}.component to  ~/Library/Audio/Plug-Ins/Components/
+  3. Drag {{NAME}}.app to /Applications if you want the standalone.
+
+  In Finder: Go > Go to Folder… and paste the path.
+
+
+FIRST LAUNCH — IMPORTANT
+This plugin is not code-signed or notarized, so macOS quarantines it and
+your DAW may show it as missing, damaged, or simply not list it at all.
+Clear the quarantine flag once, in Terminal:
+
+  xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/"{{NAME}}.vst3"
+  xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/Components/"{{NAME}}.component"
+
+Then restart your DAW. Logic and other AU hosts may need a full quit and
+reopen so the plugin is re-validated; you can check the AU yourself with:
+
+  auval -a | grep -i "{{NAME}}"
+
+
+LICENSE
+MIT. Free to use, including in released music. No attribution required.
+
+https://jtbartee.github.io/music-machines/

@@ -262,7 +262,7 @@ body::before {
 
 /* ---------- collection section ---------- */
 .collection {
-  padding: 12px 0 100px;
+  padding: 12px 0 24px;
 }
 .collection-head {
   display: flex;
@@ -543,6 +543,216 @@ body::before {
   border-color: var(--accent);
 }
 
+/* ---------- header nav ---------- */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+/* ---------- native plugins ---------- */
+.plugins {
+  padding: 40px 0 100px;
+  /* clears the sticky header when jumped to via #plugins */
+  scroll-margin-top: 64px;
+}
+.plugins-intro {
+  max-width: 74ch;
+  margin: -8px 0 30px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+
+.plugin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+}
+
+.plugin {
+  --card-accent: var(--accent);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 22px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.22s var(--ease), box-shadow 0.22s var(--ease);
+}
+.plugin:hover,
+.plugin:focus-within {
+  border-color: color-mix(in srgb, var(--card-accent) 55%, var(--border-strong));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--card-accent) 22%, transparent);
+}
+
+.plugin-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.plugin-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--card-accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--card-accent) 70%, transparent);
+  flex: none;
+}
+.plugin-title {
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+.plugin-category {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  color: var(--text-faint);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+
+.plugin-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.plugin-formats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.plugin-formats li {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+  background: var(--bg-raised);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+}
+
+.plugin-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+.plugin-actions .btn {
+  flex: 0 1 auto;
+  min-width: 170px;
+}
+.plugin-size {
+  font-weight: 500;
+  opacity: 0.75;
+}
+.plugin-weblink {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  transition: color 0.15s var(--ease);
+}
+.plugin-weblink:hover,
+.plugin-weblink:focus-visible {
+  color: var(--card-accent);
+}
+
+.plugin-meta {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  color: var(--text-faint);
+  border-top: 1px solid var(--border-soft);
+  padding-top: 12px;
+  margin-top: auto;
+}
+
+/* ---------- install note ---------- */
+.install-note {
+  margin-top: 26px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+}
+.install-note summary {
+  cursor: pointer;
+  padding: 16px 20px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  list-style: none;
+}
+.install-note summary::-webkit-details-marker {
+  display: none;
+}
+.install-note summary::before {
+  content: "+";
+  display: inline-block;
+  width: 16px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.install-note[open] summary::before {
+  content: "\2212";
+}
+.install-note summary:hover,
+.install-note summary:focus-visible {
+  color: var(--text);
+}
+.install-body {
+  padding: 0 20px 20px 36px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-dim);
+  max-width: 80ch;
+}
+.install-body p + p,
+.install-body ol,
+.install-body pre {
+  margin-top: 12px;
+}
+.install-body ol {
+  padding-left: 20px;
+  list-style: decimal;
+}
+.install-body li {
+  margin-bottom: 4px;
+}
+.install-body code {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+.install-body pre {
+  background: var(--bg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  overflow-x: auto;
+}
+.install-body pre code {
+  border: 0;
+  background: none;
+  padding: 0;
+  white-space: pre;
+}
+
 /* ---------- responsive ---------- */
 @media (max-width: 900px) {
   .wrap {
@@ -555,6 +765,9 @@ body::before {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
   }
+  .plugin-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
 }
 @media (max-width: 620px) {
   .site-header .wrap {
@@ -565,6 +778,20 @@ body::before {
   }
   .grid {
     grid-template-columns: 1fr;
+  }
+  .plugin-grid {
+    grid-template-columns: 1fr;
+  }
+  .plugin-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .plugin-actions .btn {
+    min-width: 0;
+  }
+  .header-nav {
+    gap: 14px;
   }
   .card-body {
     padding: 18px 18px 20px;

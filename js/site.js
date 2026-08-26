@@ -7,6 +7,9 @@
   document.querySelectorAll("[data-machine-count]").forEach((el) => {
     el.textContent = String(PROJECTS.length);
   });
+  document.querySelectorAll("[data-plugin-count]").forEach((el) => {
+    el.textContent = String(typeof PLUGINS !== "undefined" ? PLUGINS.length : 0);
+  });
 
   /* ---------- render cards ---------- */
   const grid = document.getElementById("grid");
@@ -48,6 +51,43 @@
 
   if (grid) {
     grid.innerHTML = PROJECTS.map(cardTemplate).join("");
+  }
+
+  /* ---------- render plugin download rows ---------- */
+  const pluginGrid = document.getElementById("plugin-grid");
+
+  function pluginTemplate(p) {
+    const formats = p.formats.map((f) => `<li>${escapeHtml(f)}</li>`).join("");
+    // The browser original this was ported from, so the pair can be compared.
+    const web = PROJECTS.find((proj) => proj.slug === p.webSlug);
+    const webLink = web && web.liveUrl
+      ? `<a class="plugin-weblink" href="${web.liveUrl}" target="_blank" rel="noopener">Play the browser version &rarr;</a>`
+      : "";
+    const size = p.size ? ` <span class="plugin-size">${escapeHtml(p.size)}</span>` : "";
+
+    return `
+      <article class="plugin" style="--card-accent:${p.accent}">
+        <div class="plugin-head">
+          <span class="plugin-indicator" aria-hidden="true"></span>
+          <h3 class="plugin-title">${escapeHtml(p.title)}</h3>
+          <span class="plugin-category">${escapeHtml(p.category)}</span>
+        </div>
+        <p class="plugin-description">${escapeHtml(p.description)}</p>
+        <ul class="plugin-formats">${formats}</ul>
+        <div class="plugin-actions">
+          <a class="btn btn-primary" href="${p.file}" download
+             aria-label="Download ${escapeHtml(p.title)} ${escapeHtml(p.version)} for macOS${p.size ? ", " + escapeHtml(p.size) : ""}">
+            Download${size}
+          </a>
+          ${webLink}
+        </div>
+        <p class="plugin-meta">v${escapeHtml(p.version)} &middot; macOS 10.15+ &middot; Universal (Apple Silicon + Intel)</p>
+      </article>
+    `;
+  }
+
+  if (pluginGrid && typeof PLUGINS !== "undefined") {
+    pluginGrid.innerHTML = PLUGINS.map(pluginTemplate).join("");
   }
 
   /* ---------- reveal-on-scroll (restrained, off entirely under reduced motion) ---------- */

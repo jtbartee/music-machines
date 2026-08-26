@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>J.BARTEE // MUSIC MACHINES — Browser-Based Instruments & Musical Experiments</title>
-  <meta name="description" content="Seven browser-based synthesizers, drum machines, and generative instruments — playable instantly, no installs. An independent electronic-music software collection by J.Bartee." />
+  <meta name="description" content="Nine browser-based synthesizers, drum machines, and generative instruments — playable instantly, no installs — plus four of them as free VST3 / AU plugins for macOS. An independent electronic-music software collection by J.Bartee." />
   <meta name="theme-color" content="#0a0a0c" />
   <link rel="canonical" href="https://jtbartee.github.io/music-machines/" />
 
@@ -40,9 +40,12 @@
         <span class="led" aria-hidden="true"></span>
         J.BARTEE
       </a>
-      <a class="header-link" href="https://github.com/jtbartee" target="_blank" rel="noopener">
-        <span>github.com/</span>jtbartee
-      </a>
+      <nav class="header-nav">
+        <a class="header-link" href="#plugins">Plugins</a>
+        <a class="header-link" href="https://github.com/jtbartee" target="_blank" rel="noopener">
+          <span>github.com/</span>jtbartee
+        </a>
+      </nav>
     </div>
   </header>
 
@@ -62,7 +65,7 @@
         <p class="status-line">
           <span><strong data-machine-count>7</strong> MACHINES</span>
           <span class="sep">//</span>
-          <span>BROWSER&#8209;BASED</span>
+          <span><strong data-plugin-count>4</strong> VST3&nbsp;/&nbsp;AU</span>
           <span class="sep">//</span>
           <span>OPEN SOURCE</span>
         </p>
@@ -81,6 +84,47 @@
         <div class="grid" id="grid"></div>
       </div>
     </section>
+
+    <section class="plugins" id="plugins">
+      <div class="wrap">
+        <div class="collection-head">
+          <h2>Native Plugins</h2>
+          <span class="count"><span data-plugin-count>4</span> PLUGINS — FREE DOWNLOAD</span>
+        </div>
+        <p class="plugins-intro">
+          Four of the machines have been ported from the browser down to native C++ so they
+          load in a DAW. Same synthesis, no web audio underneath — each download carries a
+          VST3, an Audio Unit and a standalone app in one universal build that runs on both
+          Apple&nbsp;Silicon and Intel Macs.
+        </p>
+        <div class="plugin-grid" id="plugin-grid"></div>
+
+        <details class="install-note">
+          <summary>Installing — read this first, or your DAW won&rsquo;t see the plugin</summary>
+          <div class="install-body">
+            <p>
+              These plugins aren&rsquo;t code-signed or notarized, so macOS quarantines them on
+              download. A quarantined plugin usually doesn&rsquo;t show up as an error &mdash; your
+              DAW just silently doesn&rsquo;t list it. Unzip, then put the pieces where the host
+              looks for them:
+            </p>
+            <ol>
+              <li><code>NAME.vst3</code> &rarr; <code>~/Library/Audio/Plug-Ins/VST3/</code></li>
+              <li><code>NAME.component</code> &rarr; <code>~/Library/Audio/Plug-Ins/Components/</code></li>
+              <li><code>NAME.app</code> &rarr; <code>/Applications</code>, if you want the standalone</li>
+            </ol>
+            <p>Then clear the quarantine flag once, in Terminal:</p>
+            <pre><code>xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/
+xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/Components/</code></pre>
+            <p>
+              Restart your DAW afterwards. Logic and other AU hosts may need a full quit and
+              reopen before they re-validate. Every download ships the same instructions in an
+              <code>INSTALL.txt</code>. Requires macOS 10.15 or later.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -94,6 +138,7 @@
   </footer>
 
   <script src="js/project-data.js"></script>
+  <script src="js/plugin-data.js"></script>
   <script src="js/site.js"></script>
 </body>
 </html>
