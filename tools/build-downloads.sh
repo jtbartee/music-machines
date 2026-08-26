@@ -16,7 +16,7 @@ set -euo pipefail
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SRC_ROOT="${1:-$(cd "$REPO_DIR/.." && pwd)}"
 OUT="$REPO_DIR/downloads"
-VERSION="1.0.0"
+VERSION="1.1.0"
 
 mkdir -p "$OUT"
 
