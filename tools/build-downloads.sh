@@ -8,31 +8,59 @@
 # this script refuses to package a single-architecture binary, because a
 # download that silently fails on an Intel Mac is worse than no download.
 #
-# Usage:  tools/build-downloads.sh [path-to-projects-dir]
+# Usage:  tools/build-downloads.sh [--only=<project-dir>] [path-to-projects-dir]
 # Default projects dir is the parent of this repo.
+#
+# --only repackages a single port. Without it every port is rebuilt from its
+# existing build-universal artefacts, which rewrites zips that did not change --
+# ~10 MB of pointless binary churn per untouched plugin.
 
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SRC_ROOT="${1:-$(cd "$REPO_DIR/.." && pwd)}"
+
+ONLY=""
+POSITIONAL=""
+for arg in "$@"; do
+  case "$arg" in
+    --only=*) ONLY="${arg#--only=}" ;;
+    *)        POSITIONAL="$arg" ;;
+  esac
+done
+
+SRC_ROOT="${POSITIONAL:-$(cd "$REPO_DIR/.." && pwd)}"
 OUT="$REPO_DIR/downloads"
-VERSION="1.1.0"
 
 mkdir -p "$OUT"
 
-# project-dir | artefacts-dir | plugin-basename | zip-basename
+# Versions are per-port, not global: the ports ship on their own schedules, and a shared
+# version number would silently re-stamp three unchanged plugins every time one of them
+# gains a feature. Each entry's version must match that project's project(... VERSION ...)
+# in its CMakeLists.txt -- the check below enforces it rather than trusting this table.
+#
+# project-dir | artefacts-dir | plugin-basename | zip-basename | version
 PORTS=(
-  "glockwork-vst|Glockwork_artefacts|GLOCKWORK|GLOCKWORK"
-  "five-voice-prophet-vst|FiveVoiceProphet_artefacts|FIVE VOICE PROPHET|FIVE-VOICE-PROPHET"
-  "jp8-vst|Jp8Synth_artefacts|JP-8|JP-8"
-  "spectra-vst|SpectraSynth_artefacts|SPECTRA|SPECTRA"
+  "glockwork-vst|Glockwork_artefacts|GLOCKWORK|GLOCKWORK|1.1.0"
+  "five-voice-prophet-vst|FiveVoiceProphet_artefacts|FIVE VOICE PROPHET|FIVE-VOICE-PROPHET|1.1.0"
+  "jp8-vst|Jp8Synth_artefacts|JP-8|JP-8|1.1.0"
+  "spectra-vst|SpectraSynth_artefacts|SPECTRA|SPECTRA|1.2.0"
 )
 
 fail=0
 
 for entry in "${PORTS[@]}"; do
-  IFS='|' read -r proj artefacts base zipbase <<< "$entry"
+  IFS='|' read -r proj artefacts base zipbase VERSION <<< "$entry"
+  [[ -n "$ONLY" && "$proj" != "$ONLY" ]] && continue
   rel="$SRC_ROOT/$proj/build-universal/$artefacts/Release"
+
+  # The table above and the plugin's own CMakeLists must agree, or the zip name claims a
+  # version the binary does not report to the host.
+  declared="$(sed -n 's/^project([A-Za-z0-9_]* VERSION \([0-9.]*\) .*/\1/p' "$SRC_ROOT/$proj/CMakeLists.txt" | head -1)"
+  if [[ "$declared" != "$VERSION" ]]; then
+    echo "VERSION MISMATCH: $proj declares $declared, this script says $VERSION"
+    fail=1
+    continue
+  fi
 
   if [[ ! -d "$rel" ]]; then
     echo "MISSING: $rel — build it with:"
